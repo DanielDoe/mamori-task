@@ -1,0 +1,128 @@
+---
+title: Integration of Convex Flow Problem into Mamori
+---
+
+# **Subject:** Integration of Convex Flow Problem into Mamori
+
+## **Introduction to Convex Flow Problem**
+
+- **Overview**: The Convex Flow Problem involves optimizing a concave utility function $U(y)$ over a directed graph, where each edge’s flow is governed by a nonlinear gain function $h_i(z)$.
+  
+- **Key Concepts**:
+  - **Graph Representation**: Consider a graph with $n$ nodes and $m$ edges, where each edge $i$ has a strictly concave gain function $h_i(z)$ mapping input $z$ to output $h_i(z)$.
+  - **Utility Function**: The objective is to maximize $U(y)$, a concave function of net flows $y$ through the network, under the constraint $y = \sum_{i=1}^{m} A_i x_i$, where $x_i$ represents the flow across edge $i$.
+
+- **Objective**: Formally, the problem is stated as:
+  $$
+  \text{maximize } U(y) \quad \text{subject to } y = \sum_{i=1}^{m} A_i x_i \text{ and } (x_i)_2 \leq h_i(-(x_i)_1), \text{ for all } i.
+  $$
+
+## **Methodology and Solution Approach**
+
+- **Problem Formulation**: The convex flow problem is solved by formulating the dual problem:
+  $$
+  \text{minimize } \bar{U}(\nu) + \sum_{i=1}^{m} f_i(A_i^T \nu),
+  $$
+  where $\bar{U}(\nu)$ is the Fenchel conjugate of $U(y)$, and $f_i$ is derived from the support function of the set of allowable flows.
+
+- **Solution Method**: The BFGS quasi-Newton method is employed to solve the dual problem efficiently, leveraging parallelization across the graph's edges for scalability.
+
+- **Implementation**: The solution is implemented in the `ConvexFlows.jl` package, allowing users to specify the utility $U(y)$ and gain functions $h_i(z)$ to solve the convex flow problem.
+
+## **Key Benefits of Convex Flow Approach**
+
+- **Global Optimality**: The solution method guarantees finding the global maximum of the concave utility function due to the convex nature of the problem.
+- **Parallelization**: The decomposition approach allows for parallel evaluation of subproblems, significantly improving computational efficiency in large networks.
+- **Mathematical Flexibility**: The framework accommodates various concave gain functions and utility functions, enabling its application to a broad range of real-world network problems.
+
+## **Introduction to Mamori**
+
+- **Overview**: Mamori is an advanced smart contract auditing system that focuses on identifying economic exploits by analyzing complex multi-function calls within smart contracts.
+- **Challenges**: Traditional auditing methods struggle with the large, complex search space of potential vulnerabilities, often leading to high false negatives.
+- **Goal**: Mamori aims to overcome these challenges by applying sophisticated optimization techniques to enhance the thoroughness and accuracy of smart contract audits.
+
+## **Integrating Convex Flow Principles into Mamori**
+
+- **Optimizing Audit Processes**: Mamori can apply the convex flow problem’s dual decomposition to optimize the allocation of audit resources, ensuring that critical parts of the contract are tested with higher priority.
+
+- **Problem Formulation**:
+  - The audit process can be seen as maximizing an audit utility function $U(y)$ over the space of possible function call sequences and inputs.
+  - The constraints represent the feasible set of audit paths and function sequences that can be tested, similar to how flows are constrained by gain functions in the convex flow problem.
+
+- **Solution Approach**: Utilize the BFGS method to iteratively refine audit strategies, targeting the most likely exploit paths with the highest potential impact.
+
+## **Enhancing Mamori’s Capabilities**
+
+- **Parallel Testing**:
+  - By decomposing the audit task into smaller, independent sub-tasks (similar to edge flows in the convex flow problem), Mamori can perform parallel audits, reducing the overall time required.
+  - The audit task can be framed as minimizing a risk function across multiple smart contract interactions, analogous to minimizing the dual problem in convex flow.
+
+- **Heuristic Optimization**:
+  - Apply BFGS to optimize the parameters used in economic exploit detection, effectively navigating the complex, non-convex space of smart contract states.
+  - The optimization could target the most significant potential vulnerabilities, reducing the risk of undetected exploits.
+
+## **Applicability to Mamori**
+
+### **Efficiency: Dual Decomposition and Parallelization**
+
+- **Objective**: Accelerate the auditing process by dividing the task into smaller, parallelizable subproblems, similar to how convex flow problems are decomposed.
+
+- **Formulation in Mamori**:
+  - Let the smart contract audit task be represented by an objective function $U(y)$, where $y$ represents the vector of audit outcomes across different contract functions or sequences.
+  - The problem can be decomposed into smaller subproblems for each function or sequence, $y_i$, similar to how flows $x_i$ are treated in the convex flow problem:
+    $$
+    \text{maximize } U(y) = \sum_{i=1}^{m} U_i(y_i) \quad \text{subject to } y = \sum_{i=1}^{m} A_i x_i.
+    $$
+  - Each subproblem $U_i(y_i)$ can be audited independently and in parallel, using the same principles as the dual decomposition in convex flows. This allows for the simultaneous evaluation of different parts of the contract, significantly reducing the overall time needed for a complete audit.
+
+### **Scalability: Handling Larger Contracts**
+
+- **Objective**: Ensure that Mamori remains efficient and effective as the size and complexity of the smart contracts increase.
+
+- **Formulation in Mamori**:
+  - In larger contracts, the number of potential function sequences $\Gamma$ and input parameters $x$ grows exponentially. Let $\Gamma_i$ represent different sequences and $x_i$ their respective input parameters:
+    $$
+    \text{maximize } U(\Gamma, x) = \sum_{i=1}^{m} U_i(\Gamma_i, x_i),
+    $$
+    where $U_i(\Gamma_i, x_i)$ represents the audit utility of sequence $\Gamma_i$ with inputs $x_i$.
+  - By applying the convex flow-inspired approach, Mamori can decompose this into smaller audits focusing on each $\Gamma_i$ and $x_i$, which are then solved in parallel:
+    $$
+    \Gamma^*_i, x^*_i = \arg\max_{\Gamma_i, x_i} U_i(\Gamma_i, x_i).
+    $$
+  - This ensures that as the contract size increases, Mamori's audit process scales effectively without being overwhelmed by the increased complexity.
+
+### **Versatility: Adapting to Various Blockchain Platforms**
+
+- **Objective**: Adapt the audit process to different blockchain environments, each with its own unique smart contract features and risks.
+
+- **Formulation in Mamori**:
+  - Different blockchain platforms can be represented as different sets of constraints $\mathcal{C}_j$ and gain functions $h_j(z)$ similar to how different network types are handled in convex flows.
+  - Let the audit task be subject to platform-specific constraints $\mathcal{C}_j$ and flows $h_j$, where $j$ indexes the blockchain platform:
+    $$
+    \text{maximize } U(y | \mathcal{C}_j, h_j) \quad \text{subject to } y = \sum_{i=1}^{m} A_i x_i.
+    $$
+  - Mamori can adapt its audit strategy by changing the constraints and gain functions based on the specific blockchain platform, ensuring that the audit is tailored to the platform’s characteristics. This adaptability allows Mamori to audit contracts on different blockchains effectively.
+
+### **Visualization: Mapping Out Exploit Pathways**
+
+- **Objective**: Provide clear visualizations of potential exploit pathways within smart contracts, aiding auditors in understanding and mitigating risks.
+
+- **Formulation in Mamori**:
+  - Similar to flow mapping in convex flows, let each potential exploit pathway in a smart contract be represented by a flow $x_i$ across an edge $i$ in a graph:
+    $$
+    x_i \leq h_i(z) \quad \text{with } z \text{ as the input triggering the exploit}.
+    $$
+  - The entire smart contract can be visualized as a network, with nodes representing contract states and edges representing transitions due to function calls. The goal is to maximize the visibility of critical paths where the flow $x_i$ exceeds a safe threshold:
+    $$
+    \text{visualize } \sum_{i=1}^{m} \mathbf{1}(x_i > \text{safe threshold}),
+    $$
+    where $\mathbf{1}$ is an indicator function marking paths where the exploit risk is high.
+  - This visual approach helps auditors quickly identify and focus on the most critical parts of the contract, reducing the risk of overlooking significant vulnerabilities.
+
+## **Conclusion**
+
+- **Summary**:
+  - The convex flow problem’s approach provides a robust mathematical framework that enhances Mamori’s ability to detect and mitigate economic risks in smart contracts.
+
+- **Future Prospects**:
+  - Further integration of advanced optimization methods could position Mamori as the leading solution for smart contract security, capable of adapting to new and evolving threats in the blockchain space.

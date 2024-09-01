@@ -1,0 +1,17 @@
+{
+  "index": "Mamori Written Task",
+  "research": "Research in Methodology",
+  "open": "Open-source library",
+  "testing": "MEV testing",
+  "presentation": "Research Presentation",
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "https://twitter.com/shuding_",
+    "newWindow": true
+  }
+}

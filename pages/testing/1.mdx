@@ -1,0 +1,72 @@
+---
+title: Deployment of a Simple Atomic MEV Arbitrage Contract on Sepolia Testnet
+---
+
+# **Subject:** Deployment of a Simple Atomic MEV Arbitrage Contract on Sepolia Testnet
+
+## **Task Overview**
+
+The objective was to deploy a simple atomic arbitrage contract on a testnet and share a verifiable transaction (tx) demonstrating the deployment and functionality. This task was based on the guidance provided by the Flashbots simple-blind-arbitrage script available at [Flashbots GitHub Repository](https://github.com/flashbots/simple-blind-arbitrage/tree/main).
+
+## **Steps Taken to Achieve the Task**
+
+### **1. Preparation and Setup**
+
+#### **1.1 Infura Project Creation**
+An Infura project was created to connect to the Sepolia testnet. The project ID was retrieved, enabling access to the Sepolia network using the Infura API.
+
+- **RPC URL:** `https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID`
+
+#### **1.2 Wallet Setup**
+MetaMask was used as the wallet interface, connected to the Sepolia testnet. Sufficient SepoliaETH (0.15 SepoliaETH) was acquired using a testnet faucet to cover the transaction costs for contract deployment.
+
+### **2. Deploying the Wrapped Ether (WETH) Contract**
+
+#### **2.1 WETH Contract**
+The WETH contract was required as a constructor argument for the `BlindBackrun` contract. If no WETH address was available on the Sepolia testnet, a new WETH contract was deployed.
+
+The following command was used to deploy the WETH contract:
+
+```bash
+forge create WETH.sol:WETH --rpc-url https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID --private-key YOUR_PRIVATE_KEY
+```
+
+- **Deployed WETH Contract Address:** `0x46e266aFdF1bB639c3Fd374dff3f5699D2901447`
+
+### **3. Deploying the BlindBackrun Contract**
+
+#### **3.1 Contract Compilation and Deployment**
+The `BlindBackrun` contract was compiled and deployed using Foundry. The constructor required the WETH contract address as an argument.
+
+Deployment Command:
+
+```bash
+forge create src/BlindBackrun.sol:BlindBackrun --rpc-url https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID --private-key YOUR_PRIVATE_KEY --constructor-args 0x46e266aFdF1bB639c3Fd374dff3f5699D2901447
+```
+
+- **Deployed BlindBackrun Contract Address:** `0xfCB726d3c1A768c77019D0CC57C073cFf6395E9c`
+
+![Terminal Output](/terminal.png)
+
+### **4. Verification and Interaction**
+
+#### **4.1 Transaction Verification**
+The deployment was verified on Sepolia Etherscan, and the contract address and transaction hash were confirmed.
+
+- **Transaction Hash:** `0x3b3b49c3c4930954fd59205af3ce8d48791f0df79b9f7c66d4fbf02103f24d9f`
+- [View Transaction on Sepolia Etherscan](https://sepolia.etherscan.io/tx/0x3b3b49c3c4930954fd59205af3ce8d48791f0df79b9f7c66d4fbf02103f24d9f)
+
+![Transaction Overview](/overview.png)
+
+![Transaction Logs](/logs.png)
+
+![Transaction State](/state.png)
+
+#### **4.2 Interaction**
+Ownership was successfully transferred to the deployer, and the contract is now ready for further interactions, such as executing the `executeArbitrage` function.
+
+## **Conclusion**
+
+The task of deploying a simple atomic arbitrage contract on the Sepolia testnet has been successfully completed. The contract was deployed at `0xfCB726d3c1A768c77019D0CC57C073cFf6395E9c` and verified on Sepolia Etherscan. The transaction hash for the deployment is `0x3b3b49c3c4930954fd59205af3ce8d48791f0df79b9f7c66d4fbf02103f24d9f`.
+
+This deployment serves as a foundational step in implementing and testing atomic MEV arbitrage strategies in a controlled testnet environment, aligned with the methodologies outlined in the Flashbots simple-blind-arbitrage repository.

@@ -1,0 +1,49 @@
+---
+title: Distinguishing Halmos from Manticore in Mamori's Framework
+---
+
+# **Subject:** Distinguishing Halmos from Manticore
+
+## **1. Focus of Symbolic Execution**
+
+- **Halmos**: Primarily focuses on enhancing existing test cases through symbolic testing, particularly within the realm of formal verification. It is designed to optimize and extend traditional testing methodologies by exploring symbolic inputs, thereby reducing redundant calculations and improving test coverage. Halmos is particularly useful for software systems where eliminating redundant paths can lead to significant performance improvements.
+
+- **Manticore**: A dynamic symbolic execution tool that focuses on analyzing binary executables and Ethereum smart contracts. Manticore is well-suited for vulnerability detection by exploring different execution paths within smart contracts and binaries. It emphasizes uncovering security issues and is often used in contexts where identifying and mitigating vulnerabilities is the primary goal.
+
+## **2. Target Domain**
+
+- **Halmos**: Designed to work within the broader context of software systems, particularly for improving the efficiency of traditional testing methodologies by embedding formal verification techniques. Its primary use case involves optimizing computational processes by eliminating redundant paths in software execution.
+
+- **Manticore**: Specifically tailored for smart contract auditing and binary analysis, Manticore is used in security-focused applications where the goal is to identify vulnerabilities. It is more specialized in handling complex state transitions and execution paths within contracts and binaries.
+
+## **3. Performance and State Management**
+
+- **Halmos**: Focuses on optimizing performance by leveraging symbolic testing to eliminate redundant calculations. It uses path pruning, state merging, and heuristic-based state selection to manage the state explosion problem, aiming to improve the efficiency of software testing and verification processes.
+
+- **Manticore**: Deals with performance issues by incorporating techniques like path pruning and parallel execution, but its primary concern is managing the state explosion problem in the context of vulnerability detection. It is more focused on ensuring comprehensive path coverage in smart contracts and binaries, even if it involves higher computational overhead.
+
+## **4. Integration and Use Case**
+
+- **Halmos**: Can be integrated into existing testing frameworks to complement and extend traditional test cases. Its integration focuses on improving the efficiency of testing processes by eliminating redundancies and optimizing execution paths.
+
+- **Manticore**: Often integrated into security auditing frameworks like Mamori's smart contract auditing. Its integration focuses on enhancing the detection of vulnerabilities within smart contracts, making it a crucial tool for security audits.
+
+## **Roles in Mamori**
+
+### **1. Halmos**
+
+- **Role**: Halmos is used within Mamori's framework to optimize computational processes by eliminating redundant calculations. It plays a key role in enhancing the efficiency of software testing and verification processes. Halmos helps reduce the computational overhead associated with traditional testing methodologies by leveraging symbolic testing to explore and eliminate unnecessary execution paths.
+
+- **Application**: In Mamori, Halmos can be applied to improve the performance of software testing frameworks, particularly in contexts where reducing redundant calculations can lead to significant performance gains. It is especially valuable in optimizing testing strategies, ensuring that resources are focused on the most critical and impactful test cases.
+
+### **2. Manticore**
+
+- **Role**: Manticore is crucial for Mamori’s smart contract auditing process, where its primary role is to identify vulnerabilities within Ethereum smart contracts. By exploring different execution paths, Manticore uncovers security issues that may not be immediately apparent through traditional testing methods.
+
+- **Application**: Within Mamori, Manticore is deployed in the auditing of smart contracts to ensure that they are secure and free from vulnerabilities. It is especially valuable in contexts where the integrity and security of smart contracts are paramount, such as in blockchain-based systems and decentralized applications.
+
+## **Summary**
+
+- **Halmos** enhances the efficiency of software testing by eliminating redundant calculations, making it a valuable tool for optimizing traditional testing processes in Mamori's computational frameworks.
+
+- **Manticore** is focused on security and vulnerability detection in smart contracts, playing a critical role in Mamori's auditing processes to ensure the security and reliability of blockchain-based systems.
