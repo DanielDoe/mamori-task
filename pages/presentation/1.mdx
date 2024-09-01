@@ -8,6 +8,8 @@ title: Integration of Convex Flow Problem into Mamori
 
 - **Overview**: The Convex Flow Problem involves optimizing a concave utility function $U(y)$ over a directed graph, where each edge’s flow is governed by a nonlinear gain function $h_i(z)$.
   
+  ![Convex Flow Problem Overview](/Slide5.JPG)
+
 - **Key Concepts**:
   - **Graph Representation**: Consider a graph with $n$ nodes and $m$ edges, where each edge $i$ has a strictly concave gain function $h_i(z)$ mapping input $z$ to output $h_i(z)$.
   - **Utility Function**: The objective is to maximize $U(y)$, a concave function of net flows $y$ through the network, under the constraint $y = \sum_{i=1}^{m} A_i x_i$, where $x_i$ represents the flow across edge $i$.
@@ -19,6 +21,8 @@ title: Integration of Convex Flow Problem into Mamori
 
 ## **Methodology and Solution Approach**
 
+  ![Methodology and Solution Approach](/Slide6.JPG)
+
 - **Problem Formulation**: The convex flow problem is solved by formulating the dual problem:
   $$
   \text{minimize } \bar{U}(\nu) + \sum_{i=1}^{m} f_i(A_i^T \nu),
@@ -29,7 +33,12 @@ title: Integration of Convex Flow Problem into Mamori
 
 - **Implementation**: The solution is implemented in the `ConvexFlows.jl` package, allowing users to specify the utility $U(y)$ and gain functions $h_i(z)$ to solve the convex flow problem.
 
+![Methodology and Solution Approach 2](/Slide7.JPG)
+
+
 ## **Key Benefits of Convex Flow Approach**
+
+![Key Benefits of Convex Flow Approach and Mamori](/Slide8.JPG)
 
 - **Global Optimality**: The solution method guarantees finding the global maximum of the concave utility function due to the convex nature of the problem.
 - **Parallelization**: The decomposition approach allows for parallel evaluation of subproblems, significantly improving computational efficiency in large networks.
@@ -43,6 +52,8 @@ title: Integration of Convex Flow Problem into Mamori
 
 ## **Integrating Convex Flow Principles into Mamori**
 
+![Integrating Convex Flow Principles into Mamori](/Slide9.JPG)
+
 - **Optimizing Audit Processes**: Mamori can apply the convex flow problem’s dual decomposition to optimize the allocation of audit resources, ensuring that critical parts of the contract are tested with higher priority.
 
 - **Problem Formulation**:
@@ -53,6 +64,8 @@ title: Integration of Convex Flow Problem into Mamori
 
 ## **Enhancing Mamori’s Capabilities**
 
+![Enhancing Mamori’s Capabilities](/Slide10.JPG)
+
 - **Parallel Testing**:
   - By decomposing the audit task into smaller, independent sub-tasks (similar to edge flows in the convex flow problem), Mamori can perform parallel audits, reducing the overall time required.
   - The audit task can be framed as minimizing a risk function across multiple smart contract interactions, analogous to minimizing the dual problem in convex flow.
@@ -62,6 +75,8 @@ title: Integration of Convex Flow Problem into Mamori
   - The optimization could target the most significant potential vulnerabilities, reducing the risk of undetected exploits.
 
 ## **Applicability to Mamori**
+
+![Applicability to Mamori](/Slide8.JPG)
 
 ### **Efficiency: Dual Decomposition and Parallelization**
 
@@ -120,6 +135,8 @@ title: Integration of Convex Flow Problem into Mamori
   - This visual approach helps auditors quickly identify and focus on the most critical parts of the contract, reducing the risk of overlooking significant vulnerabilities.
 
 ## **Conclusion**
+
+![Conclusion](/Slide11.JPG)
 
 - **Summary**:
   - The convex flow problem’s approach provides a robust mathematical framework that enhances Mamori’s ability to detect and mitigate economic risks in smart contracts.
